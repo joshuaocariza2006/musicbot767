@@ -14,6 +14,16 @@ Edit `.env` and add your Discord bot token:
 DISCORD_TOKEN=your_discord_bot_token_here
 ```
 
+**Spotify API Setup** (for music search):
+- Go to https://developer.spotify.com/dashboard
+- Create an app
+- Get your **Client ID** and **Client Secret**
+- Add to `.env`:
+```
+SPOTIFY_CLIENT_ID=your_spotify_client_id_here
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret_here
+```
+
 Optionally add Genius API key for lyrics (get it from https://genius.com/api-clients):
 ```
 GENIUS_API_KEY=your_genius_api_key_here
@@ -48,7 +58,8 @@ npm run dev
 
 ### "Could not find any songs!"
 - Make sure your search query is specific (e.g., "Never Gonna Give You Up Rick Astley" instead of just "song")
-- The bot searches YouTube, SoundCloud, and Spotify in that order
+- The bot now searches Spotify first, then YouTube
+- Make sure `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET` are set in `.env`
 - Try a direct YouTube/Spotify URL instead
 
 ### Bot doesn't start
