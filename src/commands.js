@@ -5,6 +5,7 @@ const { MusicQueue } = require("./queue");
 const { playSong } = require("./player");
 const { fetchLyrics } = require("./lyrics");
 const { FILTER_MAP } = require("./filters");
+const { searchSong } = require("./search");
 const {
   queueEmbed,
   addedToQueueEmbed,
@@ -431,32 +432,13 @@ function makeSong(sp, source, user) {
 }
 
 async function searchAcrossSources(query, requestedBy) {
-  const sourceMap = [
-    { type: "yt", source: "yt_search" },
-    { type: "yt", source: "youtube" },
-    { type: "sc", source: "soundcloud" },
-    { type: "sp", source: "spotify" },
-  ];
-
-  for (const { type, source } of sourceMap) {
-    try {
-      const results = await play.search(query, { limit: 1, source });
-      if (!results?.length) continue;
-      const v = results[0];
-      if (!v?.url) continue;
-      return [
-        {
-          title: v.title ?? v.name ?? "Unknown title",
-          url: v.url,
-          duration: v.durationRaw ?? formatDuration(v.durationInMs),
-          thumbnail: v.thumbnails?.[0]?.url ?? v.thumbnail?.url,
-          source: type,
-          requestedBy,
-        },
-      ];
-    } catch (err) {
-      console.debug(`Search failed for ${source}:`, err?.message ?? err);
+  try {
+    const results = await searchSong(query, requestedBy);
+    if (results?.length) {
+      return results;
     }
+  } catch (err) {
+    console.error("Search failed:", err?.message ?? err);
   }
 
   return [];
