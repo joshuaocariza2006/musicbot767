@@ -1,0 +1,25 @@
+{
+  "name": "jockie-music-bot",
+  "version": "2.0.0",
+  "description": "Advanced Discord music bot with multi-instance, audio filters, lyrics, and channel locking",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:all": "node src/launcher.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "discord.js": "^14.16.3",
+    "@discordjs/voice": "^0.17.0",
+    "@discordjs/opus": "^0.9.0",
+    "sodium-native": "^4.3.1",
+    "play-dl": "^1.9.7",
+    "genius-lyrics": "^4.4.7",
+    "prism-media": "^1.3.5",
+    "dotenv": "^16.4.7",
+    "@discordjs/rest": "^2.4.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
